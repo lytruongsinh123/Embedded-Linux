@@ -104,7 +104,7 @@ int main(void)
     }
 
 
-    if (flock(fd, LOCK_SH) == -1)
+    if (flock(fd, LOCK_EX) == -1)
     {
         // flock() thiết lập LOCK trên file mà fd đang trỏ tới
         //
