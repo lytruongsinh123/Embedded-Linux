@@ -21,11 +21,8 @@ static void* thr_handle1(void *args)
 }
 static void* thr_handle2(void *args)
 {
-    printf("sleep 5 s\n");
     sleep(5);
     pthread_exit(NULL); // thoát 1 thread
-    printf("Exited");
-    // exit(1); // exit() thì tất cả thread còn lại thoát hết
     while(1)
     {
         printf("thread2 handler\n");
@@ -34,9 +31,9 @@ static void* thr_handle2(void *args)
 }
 static void* thr_handle3(void *args)
 {
-    // pthread_detach(pthread_self());
+    pthread_detach(pthread_self());
     // sleep(1);
-    pthread_exit(NULL);
+    // pthread_exit(NULL);
 }
 int main(int argc, char const *argv[])
 {
@@ -56,14 +53,6 @@ int main(int argc, char const *argv[])
         printf("pthread_create() error number=%d\n", ret);
         return -1;
     }
-    printf("waiting...\n");
-    sleep(10);
-    pthread_join(thread_id2, NULL);
-    printf("Done\n");
-    // sleep(5);
-    // pthread_cancel(thread_id2); // hủy 1 thread được chỉ định
-    // printf("thread_id2 termination\n");
-    while(1);
     while(1)
     {
         if(ret = pthread_create(&thread_id3, NULL, &thr_handle3, NULL))
@@ -72,7 +61,7 @@ int main(int argc, char const *argv[])
             break;
         }
         counter++;
-        // pthread_join(thread_id3, NULL);
+        // pthread_join(thread_id3, NULL); dùng detaching có hiệu quả tương tự
         if(counter % 1000 == 0)
         {
             printf("Thread create: %d\n", counter);
