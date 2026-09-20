@@ -1,4 +1,4 @@
-.PHONY: clean create_thread exit_thread detaching_thread multil_thread
+.PHONY: clean create_thread exit_thread detaching_thread multil_thread dead_lock polling condition_var
 
 CC := gcc
 
@@ -12,6 +12,12 @@ detaching_thread: detaching_thread.o
 	$(CC) $(CFLAGS) -o detaching_thread detaching_thread.o
 multil_thread: multil_thread.o
 	$(CC) $(CFLAGS) -o multil_thread multil_thread.o
+dead_lock: dead_lock.o
+	$(CC) $(CFLAGS) -o dead_lock dead_lock.o
+polling: polling.o
+	$(CC) $(CFLAGS) -o polling polling.o
+condition_var: condition_var.o
+	$(CC) $(CFLAGS) -o condition_var condition_var.o
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 clean:
