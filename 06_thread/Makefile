@@ -1,4 +1,4 @@
-.PHONY: clean create_thread exit_thread detaching_thread multil_thread dead_lock polling condition_var
+.PHONY: clean create_thread exit_thread detaching_thread multil_thread dead_lock polling condition_var baitap
 
 CC := gcc
 
@@ -18,6 +18,8 @@ polling: polling.o
 	$(CC) $(CFLAGS) -o polling polling.o
 condition_var: condition_var.o
 	$(CC) $(CFLAGS) -o condition_var condition_var.o
+baitap: baitap.o
+	$(CC) $(CFLAGS) -o baitap baitap.o
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 clean:
