@@ -10,7 +10,7 @@ void sig_handler1(int signum)
 }
 int main()
 {
-    sigset new_set, old_set;
+    sigset_t new_set, old_set;
     if(signal(SIGINT, sig_handler1) == SIG_ERR)
     {
         fprintf(stderr, "Can not handle SIGINT\n");

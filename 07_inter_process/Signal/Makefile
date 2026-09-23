@@ -1,4 +1,4 @@
-.PHONY: sigint sigkill sigterm kill_func
+.PHONY: sigint sigkill sigterm kill_func block
 
 CC := gcc
 
@@ -12,6 +12,8 @@ sigterm: sigterm.o
 	$(CC) $(CFLAGS) -o sigterm sigterm.o
 kill_func: kill_func.o
 	$(CC) $(CFLAGS) -o kill_func kill_func.o
+block: block.o
+	$(CC) $(CFLAGS) -o block block.o
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 clean:
