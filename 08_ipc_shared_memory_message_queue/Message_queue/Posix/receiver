@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <mqueue.h>
+
+int main()
+{
+    mqd_t mq;
+
+    char buffer[100];
+    unsigned int priority;
+
+    mq = mq_open(
+        "/hung_queue",
+        O_RDONLY
+    );
+
+    if (mq == (mqd_t)-1)
+    {
+        perror("mq_open");
+        return 1;
+    }
+
+    mq_receive(
+        mq,
+        buffer,
+        sizeof(buffer),
+        &priority
+    );
+
+    printf("Received: %s\n", buffer);
+    printf("Priority: %u\n", priority);
+
+    mq_close(mq);
+
+    mq_unlink("/hung_queue");
+
+    return 0;
+}
