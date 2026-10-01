@@ -40,4 +40,25 @@ int main(int argc, char *argv[])
     }
     
     if(datafd = accept(fd, (struct sockaddr*)&svaddr, &len ))
+    {
+        return 1;
+    }
+    else 
+    {
+        printf("accept connect\n");
+    }
+    while(1)
+    {
+        if(read(datafd, buf, BUF_SIZE) > 0)
+        {
+            for(j = 0; i < BUF_SIZE; j++)
+            {
+                buf[j] = toupper((unsigned char) buf[j]);
+            }
+            printf("start response %s\n", buf);
+            write(datafd, buf, BUF_SIZE - 1);
+        }
+    }
+    close(fd);
+    remove(SOCK_PATH);
 }
